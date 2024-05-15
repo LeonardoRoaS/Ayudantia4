@@ -58,6 +58,21 @@ public class ProductoDAO {
         }
         return datosResultado;
     }
+    public static String[][] obtenerProductos(DSLContext query) {
+        Table productos = DSL.table("Productos");
+        Result resultados = query.select().from(productos).fetch();
+        return exportardatos(resultados);
+    }
+    public static Object[] getNombreProducto(DSLContext query){
+        Table productos= DSL.table("Productos");
+        Result resultados = query.select(productos.field("nombre_producto")).from(productos).fetch();
+        if(resultados.size()==0){
+            return new String[]{"Error no existen productos"};
+        }
+        else {
+            return resultados.getValues("nombre_producto").toArray();
+        }
+    }
 
 
 
@@ -65,6 +80,11 @@ public class ProductoDAO {
 
 
 
+
+    public static void eliminarProducto(DSLContext query, String nombre) {
+        Table productos = DSL.table("Productos");
+        query.delete(productos).where(DSL.field("nombre_producto").eq(nombre)).execute();
+    }
 
 
 

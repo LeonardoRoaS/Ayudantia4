@@ -34,8 +34,18 @@ public class ProductoController {
         String[][] datosProductos = ProductoDAO.obtenerProductosNombre(query,nombre);
         DBConnector.closeConnection();
         return datosProductos;
-
-
+    }
+    public static String[][] mostrarProductos() throws ClassNotFoundException {
+        DSLContext query = DBGenerator.conectarBD("Tienda");
+        String[][] datosProductos = ProductoDAO.obtenerProductos(query);
+        DBConnector.closeConnection();
+        return datosProductos;
+    }
+    public static Object[] getNombreProducto() throws ClassNotFoundException {
+        DSLContext query = DBGenerator.conectarBD("Tienda");
+        Object[] productos = ProductoDAO.getNombreProducto(query);
+        DBConnector.closeConnection();
+        return productos;
     }
 
 
@@ -48,7 +58,11 @@ public class ProductoController {
 
 
 
-
+    public static void eliminarProducto(String nombre) throws ClassNotFoundException {
+        DSLContext query = DBGenerator.conectarBD("Tienda");
+        ProductoDAO.eliminarProducto(query, nombre);
+        DBConnector.closeConnection();
+    }
 
 
 

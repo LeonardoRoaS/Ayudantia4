@@ -20,7 +20,6 @@ public class VentanaBuscarProducto extends Ventana {
         generarCampoNombre();
         generarBotonBuscarVehiculo();
         generarBotonCancelar();
-        generarListaID();
     }
     private void generarCampoNombre(){
         String textoNombre= "Nombre del producto:";

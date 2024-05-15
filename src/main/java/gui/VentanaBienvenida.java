@@ -88,8 +88,24 @@ public class VentanaBienvenida extends Ventana {
             this.dispose();
         }
         //ACCION BOTON MOSTRAR PRODUCTO
-
+        if(e.getSource() == this.botonMostrarProductos){
+            String[] nombreColumnas={"Nombre producto","Marca","ID"};
+            try {
+                String[][] exportarDatos = ProductoController.mostrarProductos();
+                VentanaTabla ventanaTabla= new VentanaTabla(exportarDatos,nombreColumnas);
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
         //ACCION BOTON ELIMINAR PRODUCTO
+        if(e.getSource() == this.botonEliminarProducto){
+            try {
+                VentanaEliminarProducto eliminarProducto = new VentanaEliminarProducto();
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }   
+            this.dispose();
+        }
         // ACCION BOTON SALIDA
         if(e.getSource() == this.botonSalida){
             this.dispose();
